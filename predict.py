@@ -2,7 +2,7 @@ import cv2
 from ultralytics import YOLO
 import traceback
 
-modelPath = '/Users/maver/Documents/Classes/Computer Vision/computer_vision_final_project/best.pt'
+modelPath = 'best_1epoch.pt'
 
 try:
     model = YOLO(modelPath)
@@ -19,7 +19,7 @@ except Exception as e:
     traceback.print_exc()
     exit(1)
 
-frame = cv2.imread('/Users/maver/Documents/Classes/Computer Vision/computer_vision_final_project/test.jpg')
+frame = cv2.imread('test.jpg')
 
 # Predict using YOLO model
 results = model.predict(frame)
@@ -47,6 +47,4 @@ for result in results:
         cv2.putText(frame, f'Class: {class_name}, Conf: {confidence:.2f}', (x1, y1-10), cv2.FONT_HERSHEY_SIMPLEX, 0.9, (0, 255, 0), 2)
 
 # Display the frame
-cv2.imshow('Frame', frame)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
+cv2.imwrite("output.jpg", frame)
