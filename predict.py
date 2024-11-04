@@ -1,12 +1,25 @@
 import cv2
-import matplotlib.pyplot as plt
-from ultralytics import YOLO 
+from ultralytics import YOLO
+import traceback
 
-modelPath = '/Users/jaydenma/Documents/computer vision/computer_vision_final_project/best.pt'  # Replace with your model path
-model = YOLO(modelPath)
+modelPath = '/Users/maver/Documents/Classes/Computer Vision/computer_vision_final_project/best.pt'
 
+try:
+    model = YOLO(modelPath)
+except KeyError as e:
+    print(f"Error loading model: {e}")
+    traceback.print_exc()
+    exit(1)
+except FileNotFoundError as e:
+    print(f"Model file not found: {e}")
+    traceback.print_exc()
+    exit(1)
+except Exception as e:
+    print(f"An unexpected error occurred: {e}")
+    traceback.print_exc()
+    exit(1)
 
-frame = cv2.imread('/Users/jaydenma/Documents/computer vision/computer_vision_final_project/test.jpg')
+frame = cv2.imread('/Users/maver/Documents/Classes/Computer Vision/computer_vision_final_project/test.jpg')
 
 # Predict using YOLO model
 results = model.predict(frame)
@@ -34,4 +47,6 @@ for result in results:
         cv2.putText(frame, f'Class: {class_name}, Conf: {confidence:.2f}', (x1, y1-10), cv2.FONT_HERSHEY_SIMPLEX, 0.9, (0, 255, 0), 2)
 
 # Display the frame
-cv2.imshow(frame)
+cv2.imshow('Frame', frame)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
