@@ -1,12 +1,19 @@
 import cv2
 import matplotlib.pyplot as plt
 from ultralytics import YOLO 
+import os
 
-modelPath = '/Users/jaydenma/Documents/computer vision/computer_vision_final_project/best.pt'  # Replace with your model path
-model = YOLO(modelPath)
+# modelPath = '/Users/jaydenma/Documents/computer vision/computer_vision_final_project/best.pt'  # Replace with your model path
+# modelPath = os.path.join(os.path.dirname(__file__), "best.pt")
+# model = YOLO(modelPath)
+# model = YOLO("yolov8n.pt")
+# model = YOLO('best.pt')
+model = YOLO('/Users/lucywu/computer_vision_final_project/best_1epoch.pt')
 
 
-frame = cv2.imread('/Users/jaydenma/Documents/computer vision/computer_vision_final_project/test.jpg')
+# frame = cv2.imread('/Users/jaydenma/Documents/computer vision/computer_vision_final_project/test.jpg')
+image_path = os.path.join(os.path.dirname(__file__), "test.jpg")
+frame = cv2.imread(image_path)
 
 # Predict using YOLO model
 results = model.predict(frame)
@@ -34,4 +41,8 @@ for result in results:
         cv2.putText(frame, f'Class: {class_name}, Conf: {confidence:.2f}', (x1, y1-10), cv2.FONT_HERSHEY_SIMPLEX, 0.9, (0, 255, 0), 2)
 
 # Display the frame
-cv2.imshow(frame)
+# cv2.imshow(frame)
+
+cv2.imshow("Image", frame)  # "Image" is the window name, and 'frame' is the image to display
+# cv2.waitKey(0)  # Waits for a key press to close the window
+# cv2.destroyAllWindows()  # Closes the window
