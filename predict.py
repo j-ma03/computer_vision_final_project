@@ -24,9 +24,7 @@ frame = cv2.imread('test.jpg')
 # Predict using YOLO model
 results = model.predict(frame)
 
-# Convert frame to RGB
-# img = cv2.cvtColor(frame, cv2.COLOR_RGB2BGR)
-
+# Process results list
 for result in results:
     boxes = result.boxes
     for box in boxes:
