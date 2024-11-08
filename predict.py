@@ -2,7 +2,7 @@ import cv2
 from ultralytics import YOLO
 import traceback
 
-modelPath = '/Users/jaydenma/Documents/computer vision/computer_vision_final_project/road features model/runs/detect/yolo11m_roadfeatures3/weights/best.pt'
+modelPath = '/Users/jaydenma/Documents/computer vision/computer_vision_final_project/road features model/runs/detect/yolo11m_roadfeatures3/weights/best.pt' # path to model
 
 try:
     model = YOLO(modelPath)
@@ -19,7 +19,7 @@ except Exception as e:
     traceback.print_exc()
     exit(1)
 
-frame = cv2.imread('/Users/jaydenma/Documents/computer vision/computer_vision_final_project/test.jpg')
+frame = cv2.imread('/Users/jaydenma/Documents/computer vision/computer_vision_final_project/manhattan.png') # input image
 
 # Predict using YOLO model
 results = model.predict(frame)
@@ -43,8 +43,6 @@ for result in results:
         # cv2.putText(img, f'Class: {class_name}, Conf: {confidence:.2f}', (x1, y1-10), cv2.FONT_HERSHEY_SIMPLEX, 0.9, (0, 255, 0), 2)
         cv2.rectangle(frame, (x1, y1), (x2, y2), color=(0, 255, 0), thickness=2)
         cv2.putText(frame, f'Class: {class_name}, Conf: {confidence:.2f}', (x1, y1-10), cv2.FONT_HERSHEY_SIMPLEX, 0.9, (0, 255, 0), 2)
-
-        print(confidence)
 
 # Display the frame
 cv2.imwrite("output.jpg", frame)
