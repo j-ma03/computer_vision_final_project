@@ -65,5 +65,5 @@ class Predict():
                 totalScore += scores[class_name] 
 
         # Display the frame
-        cv2.imwrite("output.jpg", frame)
+        # cv2.imwrite("output.jpg", frame)
         return totalScore
