@@ -10,8 +10,7 @@ class Predict():
 #     def get_score(self, img):
 #         modelPath = '/Users/jaydenma/Documents/computer vision/computer_vision_final_project/road features model/runs/detect/yolo11m_roadfeatures3/weights/last.pt'
 
-    def get_score(self, modelPath, imgPath): # get the safety score of one image
-        scorePath = './scores.csv'
+    def get_score(self, modelPath, imgPath, scorePath): # get the safety score of one image
         totalScore = 0
 
         # Read scores from CSV file into a dictionary

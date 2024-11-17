@@ -3,7 +3,8 @@ import os
 
 def main():
     input_folder = 'input images'
-    modelPath = './road features model/runs/detect/yolo11m_roadfeatures3/weights/best.pt'
+    modelPath = './road features model v2/weights/best.pt'
+    scorePath = './scores v2.csv'
     path_scores = {}
 
     for subdir, _, _ in os.walk(input_folder, topdown=True):
@@ -16,7 +17,7 @@ def main():
             if filename.endswith(('.png', '.jpg', '.jpeg')):
                 image_path = os.path.join(input_folder, filename)
                 prediction = Predict()
-                score = prediction.get_score(modelPath, image_path)
+                score = prediction.get_score(modelPath, image_path, scorePath)
                 print(f'Safety score for {filename}: {score}')
                 path_total_score += score
 
