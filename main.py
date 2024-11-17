@@ -2,7 +2,7 @@ from predict import Predict
 import os
 
 def main():
-    input_folder = 'input images'
+    input_folder = 'input_images'
     modelPath = './road features model v2/weights/best.pt'
     scorePath = './scores v2.csv'
     path_scores = {}
