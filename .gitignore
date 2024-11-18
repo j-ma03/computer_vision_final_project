@@ -85,3 +85,6 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# Output image
+output.jpg

@@ -6,14 +6,10 @@ import sys
 
 # totalScore = 0
 
-input_folder = 'input images'
-modelPath = './road features model v2/weights/best.pt'
+input_folder = 'input_images'
+modelPath = './road features model v3/runs/detect/yolo11m_roadfeatures2/weights/best.pt'
 scorePath = './scores v2.csv'
-if len(sys.argv) != 2:
-    print("Usage: python output_image.py <path_to_image>")
-    sys.exit(1)
-
-imgPath = sys.argv[1]
+imgPath = input("Enter the path to the image: ")
 
 # Read scores from CSV file into a dictionary
 scores = {}
@@ -57,12 +53,13 @@ for result in results:
             'confidence': confidence.item(),
             'bbox': [x1, y1, x2, y2]
         }
-        # cv2.rectangle(img, (x1, y1), (x2, y2), color=(0, 255, 0), thickness=2)
-        # cv2.putText(img, f'Class: {class_name}, Conf: {confidence:.2f}', (x1, y1-10), cv2.FONT_HERSHEY_SIMPLEX, 0.9, (0, 255, 0), 2)
-        cv2.rectangle(frame, (x1, y1), (x2, y2), color=(0, 255, 0), thickness=2)
-        cv2.putText(frame, f'Class: {class_name}, Conf: {confidence:.2f}', (x1, y1-10), cv2.FONT_HERSHEY_SIMPLEX, 0.9, (0, 255, 0), 2)
-        # print(class_name, scores[class_name], confidence)
-        print(class_name, scores[class_name], confidence)
+        if (confidence >= 0):
+            # cv2.rectangle(img, (x1, y1), (x2, y2), color=(0, 255, 0), thickness=2)
+            # cv2.putText(img, f'Class: {class_name}, Conf: {confidence:.2f}', (x1, y1-10), cv2.FONT_HERSHEY_SIMPLEX, 0.9, (0, 255, 0), 2)
+            cv2.rectangle(frame, (x1, y1), (x2, y2), color=(0, 255, 0), thickness=2)
+            cv2.putText(frame, f'Class: {class_name}, Conf: {confidence:.2f}', (x1, y1-10), cv2.FONT_HERSHEY_SIMPLEX, 0.9, (0, 255, 0), 2)
+            # print(class_name, scores[class_name], confidence)
+            print(class_name, scores[class_name], confidence)
 
     # Display the frame
     cv2.imwrite("output.jpg", frame)

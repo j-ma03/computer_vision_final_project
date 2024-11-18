@@ -55,13 +55,12 @@ class Predict():
                     'confidence': confidence.item(),
                     'bbox': [x1, y1, x2, y2]
                 }
-                # cv2.rectangle(img, (x1, y1), (x2, y2), color=(0, 255, 0), thickness=2)
-                # cv2.putText(img, f'Class: {class_name}, Conf: {confidence:.2f}', (x1, y1-10), cv2.FONT_HERSHEY_SIMPLEX, 0.9, (0, 255, 0), 2)
-                cv2.rectangle(frame, (x1, y1), (x2, y2), color=(0, 255, 0), thickness=2)
-                cv2.putText(frame, f'Class: {class_name}, Conf: {confidence:.2f}', (x1, y1-10), cv2.FONT_HERSHEY_SIMPLEX, 0.9, (0, 255, 0), 2)
+
+                # cv2.rectangle(frame, (x1, y1), (x2, y2), color=(0, 255, 0), thickness=2)
+                # cv2.putText(frame, f'Class: {class_name}, Conf: {confidence:.2f}', (x1, y1-10), cv2.FONT_HERSHEY_SIMPLEX, 0.9, (0, 255, 0), 2)
                 # print(class_name, scores[class_name], confidence)
-                print(class_name, scores[class_name], confidence)
-                totalScore += scores[class_name] 
+                if (confidence >= 0.5):
+                    totalScore += scores[class_name] 
 
         # Display the frame
         # cv2.imwrite("output.jpg", frame)
